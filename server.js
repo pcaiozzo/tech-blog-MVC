@@ -1,15 +1,15 @@
-const path = require("path");
-const express = require("express");
 const session = require("express-session");
+const express = require("express");
 const exphbs = require("express-handlebars");
 const helpers = require("./utils/helpers");
+const path = require("path");
+const models = require("./models");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const sequelizeConnection = require("./config/sequelizeConnection");
+const connection = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
-const models = require("./models"); // init models
 
 const sess = {
   secret: "Super secret secret",
@@ -17,7 +17,7 @@ const sess = {
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelizeConnection,
+    db: connection,
   }),
 };
 
@@ -30,11 +30,10 @@ app.set("view engine", "handlebars");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
-
+app.use(express.static(__dirname + "/public"));
 app.use(require("./controllers/"));
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`);
-  sequelizeConnection.sync({ force: false }); //.then(() => require('./seeds'))
+  connection.sync({ force: false });
 });

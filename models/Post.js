@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
-const sequelizeConnection = require("../config/sequelizeConnection");
+const connection = require("../config/connection");
 
-const Post = sequelizeConnection.define(
+const Post = connection.define(
   "post",
   {
     id: {
@@ -11,28 +11,32 @@ const Post = sequelizeConnection.define(
       allowNull: false,
     },
 
+    title: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+
     content: {
       type: Sequelize.TEXT,
-      allowNull: false
-      },
+      allowNull: false,
+    },
 
     user_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
       reference: {
-        model: 'User',
-        key: 'id'
-      }
-      }
+        model: "User",
+        key: "id",
+      },
     },
+  },
   {
-    sequelize: sequelizeConnection,
-    timestamps: false,
+    sequelize: connection,
+    timestamps: true,
     freezeTableName: true,
     modelName: "posts",
     underscored: true,
   }
 );
-
 
 module.exports = Post;

@@ -1,69 +1,65 @@
-const {
-  User,
-  Post,
-  Comment
-} = require('../models');
+const { User, Post, Comment } = require("../models");
 
 const users = [
   {
-    username: "Anthony",
-    password: "coding1",
+    username: "Paige",
+    password: "mom123",
   },
 
   {
-    username: "Paige",
-    password: "coding2",
+    username: "Anthony",
+    password: "dad123",
   },
 
   {
     username: "Carter",
-    password: "iliketurtles",
+    password: "son123",
   },
 
   {
     username: "Adalyn",
-    password: "princess123",
+    password: "daughter123",
   },
 ];
 
 const posts = [
   {
-    title: "why moms are great",
-    content: "because they are",
+    title: "Why are mom's the best??",
+    content: "Because they love so much!",
     user_id: 2,
   },
 
   {
-    title: "what is the best day",
-    content: "fridays",
+    title: "Dad's are super heros!",
+    content: "Dad's are the best!",
     user_id: 1,
   },
 
   {
-    title: "food is good",
-    content: "i love eating good food",
+    title: "Places to go!",
+    content: "I want to go to the zoo!",
     user_id: 3,
   },
 ];
 
 const comments = [
   {
-    content: "this is great",
+    content: "Awesome!",
     user_id: 2,
     post_id: 1,
   },
 
   {
-    content: "wow, that's interesting",
+    content: "GREAT!",
     user_id: 3,
     post_id: 1,
   },
 ];
 
-const plantSeeds = async () => {
+const giveSeeds = async () => {
   await User.bulkCreate(users, { individualHooks: true });
   await Post.bulkCreate(posts);
   await Comment.bulkCreate(comments);
 };
 
-plantSeeds();
+giveSeeds();
