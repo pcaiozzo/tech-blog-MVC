@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(require("./controllers/"));
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
   console.log(`App listening on port ${PORT}!`);
   connection.sync({ force: false }); //.then(() => require('./seeds'))
 });
